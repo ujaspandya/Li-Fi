@@ -1,0 +1,105 @@
+int sensorPin = A0; // select the input pin for ldr
+
+int sensorValue = 0; // variable to store the value coming from the sensor
+
+int light=0;
+
+int i=0;
+
+int d[32];
+
+int temp=1;
+
+int k=0; int add=0;
+
+int a=1001;//-------------- replace with any value of your choice
+
+void setup()
+
+{ pinMode(13, OUTPUT); //pin connected to the relay
+
+Serial.begin(9600); //sets serial port for communication
+
+Serial.println(sensorPin);
+
+int b;
+
+while(a!=0)
+
+{
+
+b=a%2; //converts binary to decimal
+
+a=a/2;
+
+if(b==1)
+
+{
+
+digitalWrite(13,HIGH);
+
+delay(2);
+
+sensorValue=analogRead(sensorPin);
+
+d[i]=sensorValue; }
+
+else
+
+{
+
+digitalWrite(13,LOW);
+
+delay(2);
+
+sensorValue=analogRead(sensorPin);
+
+d[i]=sensorValue;
+
+}
+
+i++;
+
+} i--;
+
+// for converting binary to decimal
+
+while(i>=0)
+
+{
+
+if(d[i]>=75&&d[i]<700)
+
+{
+
+k=i;
+
+while(k!=0)
+
+{
+
+temp=temp*2;
+
+k--;
+
+}
+
+add=add+temp;
+
+temp=1;
+
+}
+
+i--;
+
+}
+
+Serial.println(add); // Final recieved value gets printed
+
+digitalWrite(13,LOW); }
+
+void loop()
+
+{
+
+}
